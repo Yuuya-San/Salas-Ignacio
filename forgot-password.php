@@ -1,3 +1,7 @@
+<?php
+include_once 'dashboard/user/authentication/user-forgot-password.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +62,7 @@
                             <li><a href="<?php echo $config->getSystemInstagram() ?>"><i class="fab fa-instagram"></i></a></li>
                         </ul>
                         <div class="sign-box">
-                            <a href="/CCSFP-MIDTERM/signin.php"><i class="fas fa-user"></i>Sign In</a>
+                            <a href="signin"><i class="fas fa-user"></i>Sign In</a>
                         </div>
                     </div>
                 </div>
@@ -167,7 +171,7 @@
                                 <div class="tab active-tab" id="tab-1">
                                     <div class="inner-box">
                                         <h4>Forgot Password?</h4>
-                                        <form action="/CCSFP-MIDTERM/dashboard/user/authentication/user-forgot-password.php" method="post">
+                                        <form action="dashboard/user/authentication/user-forgot-password.php" method="post" class="default-form">
                                             <div class="form-group">
                                                 <label>Email address</label>
                                                 <input type="email" name="email" required autofocus>
@@ -177,7 +181,7 @@
                                             </div>
                                         </form>
                                         <div class="othre-text">
-                                            <p>Back to <a href="/CCSFP-MIDTERM/signin.php">Sign In</a></p>
+                                            <p>Back to <a href="signin">Sign In</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -259,8 +263,8 @@
     </div>
 
     <!-- script -->
-    <?php include_once __DIR__.'/configuration/footer.php'; ?>
-    <?php include_once __DIR__.'/configuration/sweetalert.php'; ?>
+    <?php include_once 'configuration/footer.php'; ?>
+    <?php include_once 'configuration/sweetalert.php'; ?>
 
 </body><!-- End of .page_wrapper -->
 

@@ -117,7 +117,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
                             <li><a href="<?php echo $config->getSystemInstagram() ?>"><i class="fab fa-instagram"></i></a></li>
                         </ul>
                         <div class="sign-box">
-                            <a href="/CCSFP-MIDTERM/signin.php"><i class="fas fa-user"></i>Sign In</a>
+                            <a href="signin"><i class="fas fa-user"></i>Sign In</a>
                         </div>
                     </div>
                 </div>
@@ -241,7 +241,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
                                             </div>
                                         </form>
                                         <div class="othre-text">
-                                            <p>Back to <a href="CCSFP-MIDTERM/signin.php">Sign In</a></p>
+                                            <p>Back to <a href="signin">Sign In</a></p>
                                         </div>
                                     </div>
                                 </div>

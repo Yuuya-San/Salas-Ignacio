@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-include_once __DIR__.'/../../../../configuration/settings-configuration.php';
+include_once __DIR__.'/../../../configuration/settings-configuration.php';
 require_once __DIR__. '/../../vendor/autoload.php';
 
 
@@ -62,7 +62,7 @@ public function mainUrl(){
   return $URL;
 }
 
- public function lasdID()
+ public function lastID()
  {
   $stmt = $this->conn->lastInsertId();
   return $stmt;
@@ -171,6 +171,11 @@ public function mainUrl(){
  
  public function logout()
  {
+
+   if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
   unset($_SESSION['adminSession']);
 
   $_SESSION['status_title'] = 'Logout!';

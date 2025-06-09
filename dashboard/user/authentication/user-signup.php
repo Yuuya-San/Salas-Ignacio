@@ -1,5 +1,5 @@
 <?php
-include_once '../../../configuration/settings-configuration.php';
+include_once __DIR__ . '/../../../configuration/settings-configuration.php';
 include_once __DIR__ . '/../../../database/dbconfig.php';
 require_once 'user-class.php';
 
@@ -10,6 +10,7 @@ class UserController
     private $smtp_email;
     private $smtp_password;
     private $system_name;
+    private $system_logo;
     private $conn;
 
 
@@ -20,7 +21,7 @@ class UserController
         $this->smtp_email = $this->user->smtpEmail();
         $this->smtp_password = $this->user->smtpPassword();
         $this->system_name = $this->user->systemName();
-
+        $this->system_logo = $this->user->systemLogo();
         $database = new Database();
         $db = $database->dbConnection();
         $this->conn = $db;
@@ -33,7 +34,7 @@ class UserController
             $_SESSION['status'] = "No email found, Please try again!";
             $_SESSION['status_code'] = "error";
             $_SESSION['status_timer'] = 40000;
-            header('Location: /CCSFP-MIDTERM/signin.php');
+            header('Location: ../../../signin');
             exit();
         } else {
             //check if the email already exist before sending OTP
@@ -46,7 +47,7 @@ class UserController
                 $_SESSION['status'] = "Email already taken. Please try another one.";
                 $_SESSION['status_code'] = "error";
                 $_SESSION['status_timer'] = 100000;
-                header('Location: /CCSFP-MIDTERM/signin.php');
+                header('Location: ../../../signin');
                 exit();
             }
             else{
@@ -121,14 +122,14 @@ class UserController
         </body>
         </html>";
 
-            $this->user->send_mail($email, $message, $subject, $this->smtp_email, $this->smtp_password, $this->system_name);
+            $this->user->send_mail($email, $message, $subject, $this->smtp_email, $this->smtp_password, $this->system_name, $this->system_logo);
 
             $_SESSION['status_title'] = 'Success!';
             $_SESSION['status'] = "We've sent the OTP to $email";
             $_SESSION['status_code'] = 'success';
             $_SESSION['status_timer'] = 40000;
 
-            header('Location: /CCSFP-MIDTERM/verify-otp.php');
+            header('Location: ../../../verify-otp');
             exit;
         }
     }
@@ -141,8 +142,8 @@ class UserController
             // Destroy the OTP in session
             unset($_SESSION['OTP']);
 
-            $this->user->register($first_name, $middle_name, $last_name, $email, $hash_password, $tokencode, $user_type, $user_status,);
-            $id = $this->user->lasdID();
+            $this->user->register($first_name, $middle_name, $last_name, $email, $hash_password, $tokencode, $user_type, $user_status);
+            $id = $this->user->lastID();
             $key = base64_encode($id);
             $id = $key;
 
@@ -219,7 +220,7 @@ class UserController
             ";
             $subject = "Welcome to MAGRENT";
 
-            $this->user->send_mail($email, $message, $subject, $this->smtp_email, $this->smtp_password, $this->system_name);
+            $this->user->send_mail($email, $message, $subject, $this->smtp_email, $this->smtp_password, $this->system_name, $this->system_logo);
             $_SESSION['status_title'] = "Success!";
             $_SESSION['status'] = "Please check the Email to check the credentials.";
             $_SESSION['status_code'] = "success";
@@ -232,7 +233,7 @@ class UserController
             unset($_SESSION['not_verify_email']);
             unset($_SESSION['user_type'] );
 
-            header('Location: /CCSFP-MIDTERM/signin.php');
+            header('Location: ../../../signin');
             exit();
 
         } else if ($otp == NULL) {
@@ -240,14 +241,14 @@ class UserController
             $_SESSION['status'] = "It appears that the OTP you entered is invalid. Please try again!";
             $_SESSION['status_code'] = "error";
             $_SESSION['status_timer'] = 40000;
-            header('Location: /CCSFP-MIDTERM/signin.php');
+            header('Location: ../../../verify-otp');
             exit();
         } else {
             $_SESSION['status_title'] = "OTP is invalid";
             $_SESSION['status'] = "It appears that the OTP you entered is invalid. Please try again!";
             $_SESSION['status_code'] = "error";
             $_SESSION['status_timer'] = 40000;
-            header('Location: /CCSFP-MIDTERM/verify-otp.php');
+            header('Location: ../../../verify-otp');
             exit();
         }
     }

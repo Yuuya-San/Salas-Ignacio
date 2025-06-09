@@ -1,0 +1,20 @@
+# Enable mod_rewrite
+RewriteEngine On
+
+# Automatically append .php if file exists
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+# If file or directory does not exist, redirect to index.php or 404 handler
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+# Prevent access to sensitive files
+<FilesMatch "\.(htaccess|env|ini|log|sh|sql|bak|zip)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# Optional: Disable directory listing
+Options -Indexes

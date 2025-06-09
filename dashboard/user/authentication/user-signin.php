@@ -16,25 +16,28 @@ if (isset($_POST['btn-signin'])) {
     $remoteip = $_SERVER['REMOTE_ADDR'];
     $url = "https://www.google.com/recaptcha/api/siteverify?secret=$site_secret_key&response=$response&remoteip=$remoteip";
     $data = file_get_contents($url);
-    $row = json_decode($data, true);
+    $row =  json_decode($data, true);
 
     if ($row['success'] == "true") {
         $email = trim($_POST['email']);
         $upass = trim($_POST['password']);
 
         $stmt = $user->runQuery('SELECT * FROM users WHERE email = :email');
-        $stmt->execute(array(":email" => $email));
+        $stmt->execute(array(
+            ":email" => $email,
+        ));
 
         $rowCount = $stmt->rowCount();
 
         if ($rowCount == 1) {
             $existingData = $stmt->fetch();
 
-            if (isset($_SESSION['property_details']) && $_SESSION['property_details'] == 1) {
+            if ($_SESSION['property_details'] == 1) {
+
                 if ($existingData['user_type'] == 2) {
                     if ($agent->login($email, $upass)) {
-                        $_SESSION['status_title'] = "Hey!";
-                        $_SESSION['status'] = "Welcome back!";
+                        $_SESSION['status_title'] = "Hey !";
+                        $_SESSION['status'] = "Welcome back! ";
                         $_SESSION['status_code'] = "success";
                         $_SESSION['status_timer'] = 10000;
                         header("Location: ../../agent/property");
@@ -42,8 +45,8 @@ if (isset($_POST['btn-signin'])) {
                     }
                 } elseif ($existingData['user_type'] == 3) {
                     if ($user->login($email, $upass)) {
-                        $_SESSION['status_title'] = "Hey!";
-                        $_SESSION['status'] = "Welcome back!";
+                        $_SESSION['status_title'] = "Hey !";
+                        $_SESSION['status'] = "Welcome back! ";
                         $_SESSION['status_code'] = "success";
                         $_SESSION['status_timer'] = 10000;
                         unset($_SESSION['property_details']);
@@ -51,18 +54,18 @@ if (isset($_POST['btn-signin'])) {
                         exit();
                     }
                 } else {
-                    $_SESSION['status_title'] = "Sorry!";
+                    $_SESSION['status_title'] = "Sorry !";
                     $_SESSION['status'] = "No account found";
                     $_SESSION['status_code'] = "error";
                     $_SESSION['status_timer'] = 10000000;
-                    header("Location: ../../../signin.php");
+                    header("Location: ../../../signin");
                     exit();
                 }
-            } else {
+            } else if ($_SESSION['property_details'] == NULL) {
                 if ($existingData['user_type'] == 2) {
                     if ($agent->login($email, $upass)) {
-                        $_SESSION['status_title'] = "Hey!";
-                        $_SESSION['status'] = "Welcome back!";
+                        $_SESSION['status_title'] = "Hey !";
+                        $_SESSION['status'] = "Welcome back! ";
                         $_SESSION['status_code'] = "success";
                         $_SESSION['status_timer'] = 10000;
                         header("Location: ../../agent/property");
@@ -70,28 +73,28 @@ if (isset($_POST['btn-signin'])) {
                     }
                 } elseif ($existingData['user_type'] == 3) {
                     if ($user->login($email, $upass)) {
-                        $_SESSION['status_title'] = "Hey!";
-                        $_SESSION['status'] = "Welcome back!";
+                        $_SESSION['status_title'] = "Hey !";
+                        $_SESSION['status'] = "Welcome back! ";
                         $_SESSION['status_code'] = "success";
                         $_SESSION['status_timer'] = 10000;
                         header("Location: ../");
                         exit();
                     }
                 } else {
-                    $_SESSION['status_title'] = "Sorry!";
+                    $_SESSION['status_titlek'] = "Sorry !";
                     $_SESSION['status'] = "No account found";
                     $_SESSION['status_code'] = "error";
                     $_SESSION['status_timer'] = 10000000;
-                    header("Location: ../../../signin.php");
+                    header("Location: ../../../signin");
                     exit();
                 }
             }
         } else {
-            $_SESSION['status_title'] = "Sorry!";
+            $_SESSION['status_title'] = "Sorry !";
             $_SESSION['status'] = "No account found or your account has been removed!";
             $_SESSION['status_code'] = "error";
             $_SESSION['status_timer'] = 10000000;
-            header("Location: /CCSFP-MIDTERM/signin.php");
+            header("Location: ../../../signin");
             exit();
         }
     } else {
@@ -99,7 +102,7 @@ if (isset($_POST['btn-signin'])) {
         $_SESSION['status'] = "Invalid captcha, please try again!";
         $_SESSION['status_code'] = "error";
         $_SESSION['status_timer'] = 40000;
-        header("Location: ../../../signin.php");
-        exit();
+        header("Location: ../../../signin");
+        exit;
     }
 }

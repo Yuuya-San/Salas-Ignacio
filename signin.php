@@ -63,7 +63,7 @@ include_once 'dashboard/user/authentication/user-signin.php';
                             <li><a href="<?php echo $config->getSystemInstagram() ?>"><i class="fab fa-instagram"></i></a></li>
                         </ul>
                         <div class="sign-box">
-                            <a href="/CCSFP-MIDTERM/signin.php"><i class="fas fa-user"></i>Sign In</a>
+                            <a href="signin"><i class="fas fa-user"></i>Sign In</a>
                         </div>
                     </div>
                 </div>
@@ -178,7 +178,7 @@ include_once 'dashboard/user/authentication/user-signin.php';
                                 <div class="tab active-tab" id="tab-1">
                                     <div class="inner-box">
                                         <h4>Sign in</h4>
-                                        <form action="/CCSFP-MIDTERM/dashboard/user/authentication/user-signin.php" method="post" novalidate class="default-form needs-validation">
+                                        <form action="dashboard/user/authentication/user-signin.php" method="post" novalidate class="default-form needs-validation">
                                             <input type="hidden" id="g-token" name="g-token">    
                                             <div class="form-group">
                                                 <label>Email address</label>
@@ -199,7 +199,7 @@ include_once 'dashboard/user/authentication/user-signin.php';
                                             </div>
                                         </form>
                                         <div class="othre-text">
-                                            <p>Forgot your password? <a href="/CCSFP-MIDTERM/forgot-password.php">Reset it here</a></p>
+                                            <p>Forgot your password? <a href="forgot-password">Reset it here</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -276,7 +276,7 @@ include_once 'dashboard/user/authentication/user-signin.php';
                                     <ul class="links-list class">
                                         <li><a href="about-us">About Us</a></li>
                                         <li><a href="find-home">Find Home</a></li>
-                                        <li><a href="contact-us">Contact Us</a></li>
+                                        <li><a href="contact-us">Contact Us</a></li><a href="">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -2,7 +2,7 @@
 include_once 'dashboard/user/authentication/user-signup.php';
 
 if ($_SESSION['OTP'] === NULL) {
-    header('Location: signin.php');
+    header('Location: signin');
     exit;
 }
 
@@ -176,7 +176,7 @@ if ($_SESSION['OTP'] === NULL) {
                                     <div class="inner-box">
                                         <h4>Verify OTP</h4>
                                         <p>Please enter the 6 digit One-Time Password (OTP) that has been sent to <?php echo $_SESSION['not_verify_email'] ?> in order to complete the registration process. To resend please wait for ( <span id="timer" style="font-weight: bold;"> </span>) <a href="dashboard/user/authentication/user-signup.php?btn-resend-otp=1" id="resent" style="text-decoration: none; color:#2dbe6c;"></a></p>
-                                        <form action="/CCSFP-MIDTERM/dashboard/user/authentication/user-signup.php" method="post" class="default-form">
+                                        <form action="dashboard/user/authentication/user-signup.php" method="post" class="default-form">
                                             <div class="form-group">
                                                 <input type="text" class="numbers" inputmode="numeric" name="verify_otp" minlength="6" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required placeholder="ex. 088123">
                                             </div>
@@ -185,7 +185,7 @@ if ($_SESSION['OTP'] === NULL) {
                                             </div>
                                         </form>
                                         <div class="othre-text">
-                                            <p>Back to <a href="/CCSFP-MIDTERM/signin.php">Sign In</a></p>
+                                            <p>Back to <a href="signin">Sign In</a></p>
                                         </div>
                                     </div>
                                 </div>

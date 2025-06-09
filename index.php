@@ -64,7 +64,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                             <li><a href="<?php echo $config->getSystemInstagram() ?>"><i class="fab fa-instagram"></i></a></li>
                         </ul>
                         <div class="sign-box">
-                            <a href="/CCSFP-MIDTERM/signin.php"><i class="fas fa-user"></i> Sign In</a>
+                            <a href="signin"><i class="fas fa-user"></i>Sign In</a>
                         </div>
                     </div>
                 </div>
